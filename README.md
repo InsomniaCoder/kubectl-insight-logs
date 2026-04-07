@@ -51,7 +51,7 @@ kubectl-loginsight --file ./app.log --model qwen/qwen3.5-9b --base-url http://lo
 |------|----------|---------|-------------|
 | `--model` / `-m` | Yes | — | Model name to pass to the LLM API |
 | `--question` / `-q` | No | — | Question to ask. If omitted, summarize mode is used |
-| `--base-url` | No | `http://localhost:1234/v1` | OpenAI-compatible API base URL |
+| `--base-url` | Yes | `http://localhost:1234/v1` | OpenAI-compatible API base URL |
 | `--api-key` | No | `test` | API key (not needed for local models) |
 | `--max-tokens` | No | `8192` | Max tokens of log content to send  |
 | `--file` / `-f` | No | — | Read logs from file instead of stdin |
