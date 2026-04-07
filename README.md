@@ -35,14 +35,14 @@ kubectl plugin list  # should show /Users/<you>/go/bin/kubectl-loginsight
 
 ```bash
 # Summarize what's happening in the logs
-kubectl logs <pod> | kubectl-loginsight --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1
+kubectl logs <pod> | kubectl loginsight --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1
 
 # Ask a specific question
-kubectl logs <pod> | kubectl-loginsight --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "why did the pod crash?"
+kubectl logs <pod> | kubectl loginsight --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "why did the pod crash?"
 
 # Read from a saved log file
 kubectl logs <pod> > ./app.log
-kubectl-loginsight --file ./app.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "any OOMKilled signs?"
+kubectl loginsight --file ./app.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "any OOMKilled signs?"
 ```
 
 ## Flags
@@ -75,10 +75,10 @@ Since `--base-url` accepts any OpenAI-compatible endpoint, you can point it at a
 
 ```bash
 # Ollama
-kubectl logs <pod> | kubectl-loginsight --model qwen2.5:7b --base-url http://localhost:11434/v1
+kubectl logs <pod> | kubectl loginsight --model qwen2.5:7b --base-url http://localhost:11434/v1
 
 # OpenAI
-kubectl logs <pod> | kubectl-loginsight --model gpt-4o --base-url https://api.openai.com/v1 --api-key sk-...
+kubectl logs <pod> | kubectl loginsight --model gpt-4o --base-url https://api.openai.com/v1 --api-key sk-...
 ```
 
 ## Large logs
@@ -115,10 +115,10 @@ cat > /tmp/test.log <<EOF
 EOF
 
 # 3. Summarize
-kubectl-loginsight --file /tmp/test.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1
+kubectl loginsight --file /tmp/test.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1
 
 # 4. Ask a question
-kubectl-loginsight --file /tmp/test.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "what went wrong?"
+kubectl loginsight --file /tmp/test.log --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "what went wrong?"
 ```
 
 ## Example output
