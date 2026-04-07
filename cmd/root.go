@@ -84,8 +84,8 @@ func run(cmd *cobra.Command, args []string) error {
 func init() {
 	rootCmd.Flags().StringP("model", "m", "", "Model name (overrides config file)")
 	rootCmd.Flags().StringP("question", "q", "", "Question to ask about the logs (optional, defaults to summarize)")
-	rootCmd.Flags().String("base-url", "http://localhost:11434/v1", "OpenAI-compatible API base URL")
-	rootCmd.Flags().String("api-key", "ollama", "API key")
-	rootCmd.Flags().Int("max-tokens", 6500, "Max tokens of log content to send (model context size minus ~1700 headroom for prompt + response)")
+	rootCmd.Flags().String("base-url", "http://localhost:1234/v1", "OpenAI-compatible API base URL")
+	rootCmd.Flags().String("api-key", "test", "API key")
+	rootCmd.Flags().Int("max-tokens", 8192, "Max tokens of log content to send (model context size minus ~1700 headroom for prompt + response)")
 	rootCmd.Flags().StringP("file", "f", "", "Read logs from file instead of stdin")
 }

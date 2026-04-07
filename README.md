@@ -53,7 +53,7 @@ kubectl-loginsight --file ./app.log --model qwen/qwen3.5-9b --base-url http://lo
 | `--question` / `-q` | No | — | Question to ask. If omitted, summarize mode is used |
 | `--base-url` | No | `http://localhost:1234/v1` | OpenAI-compatible API base URL |
 | `--api-key` | No | `test` | API key (not needed for local models) |
-| `--max-tokens` | No | `6500` | Max tokens of log content to send (model context size minus ~1700 headroom for prompt + response) |
+| `--max-tokens` | No | `8192` | Max tokens of log content to send  |
 | `--file` / `-f` | No | — | Read logs from file instead of stdin |
 
 ## Config File
@@ -64,7 +64,7 @@ To avoid typing flags every time, create `~/.kube/log-insight.yaml`:
 model: qwen/qwen3.5-9b
 base-url: http://localhost:1234/v1
 api-key: test
-max-tokens: 6500
+max-tokens: 8192
 ```
 
 Flags always override config file values.
@@ -86,12 +86,12 @@ kubectl logs <pod> | kubectl-loginsight --model gpt-4o --base-url https://api.op
 If logs exceed `--max-tokens`, the oldest lines are dropped and a warning is printed to stderr:
 
 ```
-⚠  Logs truncated to 6500 tokens (oldest lines removed)
+⚠  Logs truncated to 8192 tokens (oldest lines removed)
 ```
 
 Use `kubectl logs --tail=200 <pod>` to limit log output before piping if needed.
 
-**Baseline context setup:** LM Studio loaded with 8192 context (Model Settings → Context Length), `--max-tokens 6500` leaves ~1700 tokens headroom for the system prompt and response. Thinking mode is disabled by default to improve speed.
+**Baseline context setup:** LM Studio loaded with 8192 context (Model Settings → Context Length), Thinking mode is disabled by default to improve speed.
 
 ## Testing
 
@@ -125,7 +125,7 @@ kubectl-loginsight --file /tmp/test.log --model qwen/qwen3.5-9b --base-url http:
 
 ```
 ➜ kubectl logs prometheus-prometheus-1 | kubectl-loginsight --model qwen/qwen3.5-9b --base-url http://localhost:1234/v1 -q "do you find any problem"
-⚠  Logs truncated to 6500 tokens (oldest lines removed)
+⚠  Logs truncated to 8192 tokens (oldest lines removed)
 
 Yes, I found several significant problems in these logs:
 
